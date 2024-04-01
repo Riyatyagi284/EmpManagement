@@ -37,8 +37,7 @@ const SignIn = () => {
       console.log("formData", formData);
 
       try {
-
-        const { data } = await axios.post("http://localhost:3000/api/v1/auth/login", formData);
+        const { data } = await axios.post("http://localhost:3000/api/v1/auth/login", formData, {withCredentials: true});
 
         console.log("data", data);
         setLoginUserData(data);

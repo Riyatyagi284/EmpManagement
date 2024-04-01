@@ -15,6 +15,8 @@ const EditModal = ({ setShowModal }) => {
         branch: "",
         phone: "",
         email: ""
+        // username: "",
+        // password: "",
     })
 
     const createChangeHandler = (e) => {
@@ -50,7 +52,8 @@ const EditModal = ({ setShowModal }) => {
             try {
 
                 try {
-                    const { data } = await axios.post("http://localhost:3000/api/v1/auth/createEmployee", formData,);
+                    const { data } = await axios.post("http://localhost:3000/api/v1/auth/createEmployee", formData,
+                    { withCredentials: true });
 
                     console.log("editdata", data);
 
@@ -58,7 +61,9 @@ const EditModal = ({ setShowModal }) => {
                         name: "",
                         branch: "",
                         phone: "",
-                        email: ""
+                        email: "",
+                     // username:"",
+                     // password:""
                     });
 
                 } catch (error) {

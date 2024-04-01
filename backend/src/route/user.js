@@ -10,28 +10,15 @@ router.post("/signup", signup)
 router.post("/login", login)
 
 // loginTracking routes 
-// router.get("/LoginActivity", verifyToken, getLoginActivity)
-// router.get("/allLoginActivity", verifyToken, isAdmin ,getAllLoginActivity)
-
-router.get("/LoginActivity", getLoginActivity)
-router.get("/allLoginActivity", getAllLoginActivity)
+router.get("/LoginActivity", verifyToken, getLoginActivity)
+router.get("/allLoginActivity", verifyToken, isAdmin ,getAllLoginActivity)
 
 
 // Admin can do all four CRUD Operation
-// router.post("/createEmployee", verifyToken, isAdmin ,createEmployee)
-// router.get("/getAllEmployee", verifyToken, isAdmin ,allEmployee)
-// router.post("/editEmployee", verifyToken, isAdmin , updateEmployee)
-// router.delete("/deleteEmployee", verifyToken, isAdmin , deleteEmployee)
+router.post("/createEmployee", verifyToken, isAdmin ,createEmployee)
+router.get("/getAllEmployee", verifyToken, isAdmin ,allEmployee)
+router.post("/editEmployee", verifyToken, isAdmin , updateEmployee)
+router.delete("/deleteEmployee", verifyToken, isAdmin , deleteEmployee)
 
-
-
-router.post("/createEmployee", createEmployee)
-router.get("/getAllEmployee", allEmployee)
-router.post("/editEmployee", updateEmployee)
-router.delete("/deleteEmployee", deleteEmployee)
-
-// Manager can View and Edit
-// router.post("/createEmployee", verifyToken, isAdmin ,createEmployee)
-// router.post("/editEmployee", verifyToken, isAdmin , updateEmployee)
 
 export default router;

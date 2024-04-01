@@ -26,7 +26,6 @@ const EditModal = ({ id, setShowModal, setEditEmpData }) => {
     }
 
 
-
     const getSubmitData = async (event, id) => {
         event.preventDefault();
 
@@ -54,8 +53,9 @@ const EditModal = ({ id, setShowModal, setEditEmpData }) => {
                 try {
                     const { data } = await axios.post("http://localhost:3000/api/v1/auth/editEmployee", {
                         ...formData,
-                        id: id // Include the id in the request body
-                    });
+                        id: id }
+                        , {withCredentials: true}
+                    );
 
                     console.log("editdata", data);
                     // setEditEmployeeData(data);

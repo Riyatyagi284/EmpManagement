@@ -23,10 +23,12 @@ const EmployeesDetails = () => {
     fetchEmployeesData()
   }, [])
 
+
   const fetchEmployeesData = async () => {
     try {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/v1/auth/getAllEmployee");
+        const { data } = await axios.get("http://localhost:3000/api/v1/auth/getAllEmployee",
+        {withCredentials: true});
 
         console.log("data", data);
         setTableBodyData(data);
@@ -49,10 +51,6 @@ const EmployeesDetails = () => {
   }
 
 
-
-
-
-
   const searchHandlerInput = (e) => {
     console.log("searchHandler", e.target.value);
     setSearch(e.target.value)
@@ -73,18 +71,20 @@ const EmployeesDetails = () => {
     setShowCreateModal(true)
   }
 
-
+// added something
   const deleteBtnHandler = async (id) => {
     console.log("deleteId", id);
 
     try {
       const response = await axios.delete(`http://localhost:3000/api/v1/auth/deleteEmployee`, {
-        data: { id }
-      });
+        data: { id }},
+        { withCredentials: true },
+      );
 
       if (response.status === 200) {
         console.log("Employee deleted successfully:", response.data);
         alert("Employee deleted successfully");
+        fetchEmployeesData();
 
       } else {
         console.error("Error deleting employee:", response.data.message);
@@ -94,7 +94,6 @@ const EmployeesDetails = () => {
     } catch (error) {
       console.error("Error during deletion:", error);
       alert(error)
-
     }
   };
 
@@ -132,13 +131,11 @@ const EmployeesDetails = () => {
 
                 {
                   tableBodyData?.employees.map((singledata) => (
-                    // console.log("employees.map", singledata)
                     <tr className="bg-white border-b border-r border-l border-t ">
                       <td key={singledata._id} className="px-6 py-4 font-medium text-gray-900 ">{singledata.name}</td>
                       <td key={singledata._id} className="px-6 py-4 font-medium text-gray-900 ">{singledata.branch}</td>
                       <td key={singledata._id} className="px-6 py-4 font-medium text-gray-900 ">{singledata.phone}</td>
                       <td key={singledata._id} className="px-6 py-4 font-medium text-gray-900 ">{singledata.email}</td>
-                      {/* <td key={singledata._id} className="px-6 py-4 font-medium text-gray-900 ">{singledata}</td> */}
 
                       < td >
                         <button className='text-blue-500 underline font-bold hover:font-bold hover:text-green-700 focus:outline-none' onClick={() => editBtnHandler(singledata._id, singledata)}>Edit</button> {"  / "}

@@ -5,14 +5,19 @@ import  convertDate  from "../utils/convertData";
 
 const LoginActivity = () => {
   const [users, setusers] = useState([]);
+  const [error, setError] = useState(null);
 
   const getUserDetails = async () => {
-    const { data } = await axios.get(
-      "http://localhost:3000/api/v1/auth/allLoginActivity",
-      { withCredentials: true }
-    );
-    if (data.success) {
-      setusers(data.user);
+    try {
+      const { data } = await axios.get(
+        "http://localhost:3000/api/v1/auth/allLoginActivity",
+        { withCredentials: true }
+      );
+      if (data.success) {
+        setusers(data.user);
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || "Not Authorised");
     }
   };
   useEffect(() => {
